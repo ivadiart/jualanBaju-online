@@ -12,33 +12,37 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
   <!--=============== CSS ===============-->
-  <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
-
-
   <link rel="stylesheet" href="<?= base_url('assets-front/css/styles.css') ?>" />
 
   <title>Fashion Store</title>
 </head>
 
 <body>
+
+  <?php if (session()->getFlashdata('alert') == 'tambah_bukutamu'): ?>
+    <script>
+      alert('Pesan telah terkirim')
+    </script>
+  <?php endif; ?>
+
   <!--=============== HEADER ===============-->
   <header class="header">
 
     <nav class="nav container">
-      <a href="index.php" class="nav__logo">
-        <img src="<?= base_url('assets/image/logo-ivanami.png') ?>" alt="" class="nav__logo-img">
+      <a href="<?= base_url('/') ?>" class="nav__logo">
+        <img src="assets/image/logo-ivanami.png" alt="" class="nav__logo-img">
       </a>
 
       <div class="nav__menu" id="nav-menu">
         <ul class="nav__list">
           <li class="nav__item">
-            <a href="<?= base_url('/') ?>" class="nav__link">Home</a>
+            <a href="<?= base_url('/') ?>" class="nav__link active-link">Home</a>
           </li>
           <li class="nav__item">
-            <a href="<?= base_url('shop') ?>" class="nav__link active-link">Shop</a>
+            <a href="<?= base_url('shop') ?>" class="nav__link">Shop</a>
           </li>
           <li class="nav__item">
-            <a href="<?= base_url('settings') ?>" class="nav__link">Settings</a>
+            <a href="<?= base_url('profile') ?>" class="nav__link">Profile</a>
           </li>
           <?php
           $this->session = session();
@@ -48,26 +52,25 @@
               <a href="<?= base_url('login-register') ?>" class="nav__link">Login</a>
             </li>
           <?php } ?>
-
         </ul>
 
         <div class="header__search">
           <input type="text" placeholder="Search for items" class="form__input">
 
           <button class="search__btn">
-            <img src="<?= base_url('assets-front/img/search.png') ?>" alt="" />
+            <img src="assets-front/img/search.png" alt="" />
           </button>
         </div>
       </div>
 
       <div class="header__user-actions">
         <a href="#" class="header__action-btn">
-          <img src="<?= base_url('assets-front/img/icon-heart.svg') ?>" alt="">
+          <img src="assets-front/img/icon-heart.svg" alt="">
           <!-- <span class="count">3</span> -->
         </a>
 
         <a href="<?= base_url('cart') ?>" class="header__action-btn">
-          <img src="<?= base_url('assets-front/img/icon-cart.svg') ?>" alt="">
+          <img src="assets-front/img/icon-cart.svg" alt="">
           <span class="count"><?= $total_cart; ?></span>
         </a>
       </div>
@@ -81,92 +84,115 @@
       <ul class="breadcrumb__list flex container">
         <li><a href="index.php" class="breadcrumb__link">Home</a></li>
         <li><span class="breadcrumb__link">></span></li>
-        <li><span class="breadcrumb__link">Shop</span></li>
-        <li><span class="breadcrumb__link">></span></li>
-        <li><span class="breadcrumb__link">Cart</span></li>
+        <li><span class="breadcrumb__link">Profile</span></li>
       </ul>
     </section>
-    <?php if (session()->getFlashdata('alert') == 'hapus_cart'): ?>
-      <script>
-        alert('Produk berhasil dihapus!')
-      </script>
-    <?php elseif (session()->getFlashdata('alert') == 'update_cart'): ?>
-      <script>
-        alert('Produk berhasil diupdate!')
-      </script>
-    <?php endif; ?>
+
+    <!--=============== ACCOUNTS ===============-->
+    <section class="accounts section--lg">
+      <div class="accounts__container container grid">
+        <div class="account__tabs">
+
+          <p class="account__tab active-tab" data-target="#dashboard">
+            <i class="fi fi-rs-settings-sliders"></i> Dashboard
+          </p>
+
+          <p class="account__tab" data-target="#orders">
+            <i class="fi fi-rs-shopping-bag"></i> Orders
+          </p>
+
+          <p class="account__tab" data-target="#contactus">
+            <i class="fi fi-rs-paper-plane"></i> Contact Us
+          </p>
+
+          <a href="<?= base_url('login-register/logout') ?>" class="account__tab">
+            <i class="fi fi-rs-exit"></i> Logout
+          </a>
+
+        </div>
+
+        <div class="tabs__content">
+
+          <div class="tab__content active-tab" content id="dashboard">
+            <h3 class="tab__header">Selamat bergabung di toko kami</h3>
+
+            <div class="tab__body">
+              <p class="tab__description">Temukan Kebutuhan Fashion Anda dengan Lebih Mudah.
+              </p>
+              <p class="tab__description">Kami menyediakan berbagai macam jenis fashion dengan model terkini dan dengan harga yang bersaing.
+              </p>
+            </div>
+          </div>
+
+          <div class="tab__content" content id="contactus">
+            <h3 class="tab__header">Contact Us</h3>
+
+            <div class="contact__us">
+
+              <form action="<?= base_url('profile/bukutamu') ?>" method="post" class="form grid">
+
+                <div class="form__group grid">
+                  <input type="text" placeholder="Name" class="form__input" name="nama" required>
+
+                  <input type="email" placeholder="Email" class="form__input" name="email" required>
+                </div>
+
+                <textarea class="form__input textarea" placeholder="Tulis pesan" name="komen" required></textarea>
+
+                <div class="form__btn">
+                  <button type="submit" class="btn">Kirim</button>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <div class="tab__content" content id="orders">
+            <h3 class="tab__header">Your Orders</h3>
+
+            <div class="tab__body">
+              <table class="placed__order-table">
+                <tr>
+                  <th>No Pesanan</th>
+                  <th>Tanggal pesan</th>
+                  <th>Status</th>
+                  <th>Total</th>
+                  <th>Details</th>
+                </tr>
+                <?php $no = 1;
+                foreach ($orders as $value) { ?>
+
+                  <tr>
+                    <td><?= $value['no_pesanan'] ?></td>
+                    <td><?= $value['tanggal_pesan'] ?></td>
+                    <td><?= $value['status'] ?></td>
+                    <td>Rp.<?= number_format(floatval($value['total_bayar']), 0, ',', '.'); ?></td>
+                    <td><a href="" class="view__order">View</a></td>
+                  </tr>
+                <?php $no++;
+                } ?>
+
+              </table>
+            </div>
+          </div>
 
 
-    <!--=============== CART ===============-->
-    <section class="cart section--lg container">
-      <div class="table__container">
-        <table class="table">
-
-          <tr>
-            <th>Image</th>
-            <th>Name</th>
-            <th>Price</th>
-            <th>Quantity</th>
-            <th>Subtotal</th>
-            <th>Remove</th>
-          </tr>
-          <?php $no = 1;
-          foreach ($cart as $value) {
-            $total = $value['qty'] * $value['harga'];
-          ?>
-            <tr>
-              <td><a href="<?= base_url('checkout/' . $value['id_cart']) ?>" class=""><img src="<?= base_url('assets/images_produk/' . $value['img_cart']) ?>" alt="" class="table__img"></a></td>
-              <td>
-                <a style="text-decoration:none" href="<?= base_url('checkout/' . $value['id_cart']) ?>" class="decoration-none">
-                  <h3 class="table__title"><?= $value['nm_produk'] ?></h3>
-                </a>
-
-                <!-- <p class="table__description">Sweater Pria Deas Off White Beludru Panas Musim Gugur Berkerudung Dingin</p> -->
-              </td>
-              <td><span class="table__price">Rp.<?= number_format(floatval($value['harga']), 2, ',', '.'); ?></span></td>
-              <td><input type="number" value="<?= $value['qty'] ?>" name="qty" class="quantity" readonly></td>
-              <input name="id" value="<?= $value['id_cart'] ?>" hidden />
-              <td><span class="table__subtotal"></span>Rp.<?= number_format(floatval($total), 2, ',', '.'); ?></td>
-              <td><a href="<?= base_url('cart/hapus/' . $value['id_cart']) ?>" onclick="javascript:return confirm('Apakah anda yakin ingin menghapus ini?')"><i class="fi fi-rs-trash table__trash"></a></i></td>
-            </tr>
-
-
-          <?php $no++;
-          } ?>
-
-        </table>
-
+        </div>
       </div>
-
-      <div class="cart__actions">
-        <!-- <button type="submit" class="btn flex btn--md">
-            <i class="fi-rs-shuffle"></i> Update Cart
-            </button> -->
-        <a href="<?= base_url('/') ?>" class="btn flex btn--md">
-          <i class="fi-rs-shopping-bag"></i> Continue Shopping
-        </a>
-      </div>
-
-      <div class="divider">
-        <i class="fi fi-rs-fingerprint"></i>
-      </div>
-
     </section>
-
 
     <!--=============== NEWSLETTER ===============-->
     <section class="newsletter section">
       <div class="newsletter__container container grid">
         <h3 class="newsletter__title flex">
           <img src="assets-front/img/icon-email.svg" alt="" class="newsletter__icon">
-          Sign up to Newsletter
+          Masukan Email
         </h3>
 
-        <p class="newsletter__description">...and receive 25% voucher for first shopping.</p>
+        <p class="newsletter__description">..untuk mendapatkan informasi terbaru tentang produk kami!</p>
 
         <form action="" class="newsletter__form">
           <input type="text" placeholder="Enter your email" class="newsletter__input">
-          <button type="submit" class="newsletter__btn">Subscribe</button>
+          <button type="submit" class="newsletter__btn">Kirim</button>
         </form>
       </div>
     </section>
@@ -182,8 +208,8 @@
 
         <h4 class="footer__subtitle">Contact</h4>
 
-        <p class="footer__description"><span>Address:</span> Gg Belong Sukamaju Baru</p>
-        <p class="footer__description"><span>Phone:</span> 62+ 82317330549</p>
+        <p class="footer__description"><span>Address:</span> Gg. Belong Sukamaju Baru</p>
+        <p class="footer__description"><span>Phone:</span> 62+ </p>
         <p class="footer__description"><span>Hours:</span> 10:00 - 18:00, Sennin - Sabtu</p>
 
         <div class="footer__social">
@@ -253,15 +279,12 @@
       <span class="designer">Redesigned by agus.d.skywalker</span>
     </div>
   </footer>
+
   <!--=============== SWIPER JS ===============-->
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
   <!--=============== MAIN JS ===============-->
-  <script src="<?= base_url('assets/js/main.js') ?>"></script>
-
-  <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> -->
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <script src="assets/js/main.js"></script>
 </body>
 
 </html>

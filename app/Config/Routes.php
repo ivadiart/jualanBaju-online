@@ -10,8 +10,8 @@ $routes->get('details/(:any)', 'DetailsController::index/$1');
 $routes->get('shop', 'ShopController::index');
 $routes->get('kategori/(:any)', 'KategoriHome::index/$1');
 
-$routes->get('settings', 'SettingsController::index');
-$routes->post('settings/bukutamu', 'SettingsController::bukutamu');
+$routes->get('profile', 'ProfileController::index');
+$routes->post('profile/bukutamu', 'ProfileController::bukutamu');
 
 $routes->get('cart', 'CartController::index');
 $routes->post('details/add_cart', 'CartController::tambah');

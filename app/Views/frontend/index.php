@@ -38,7 +38,7 @@
             <a href="<?= base_url('shop') ?>" class="nav__link">Shop</a>
           </li>
           <li class="nav__item">
-            <a href="<?= base_url('settings') ?>" class="nav__link">Settings</a>
+            <a href="<?= base_url('profile') ?>" class="nav__link">Profile</a>
           </li>
           <?php
           $this->session = session();

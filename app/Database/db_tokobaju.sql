@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Waktu pembuatan: 26 Sep 2024 pada 08.19
--- Versi server: 10.4.32-MariaDB
--- Versi PHP: 8.2.12
+-- Host: localhost:3306
+-- Generation Time: Jan 11, 2025 at 01:01 AM
+-- Server version: 8.0.30
+-- PHP Version: 8.1.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,101 +18,103 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `fashion-store`
+-- Database: `db_tokobaju`
 --
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `akses_admin`
+-- Table structure for table `akses_admin`
 --
 
 CREATE TABLE `akses_admin` (
-  `id` int(11) NOT NULL,
-  `username` varchar(255) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  `level` varchar(255) NOT NULL
+  `id` int NOT NULL,
+  `username` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `password` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `level` varchar(255) COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `akses_admin`
+-- Dumping data for table `akses_admin`
 --
 
 INSERT INTO `akses_admin` (`id`, `username`, `password`, `level`) VALUES
-(1, 'gani', '202cb962ac59075b964b07152d234b70', 'owner');
+(1, 'agus', '202cb962ac59075b964b07152d234b70', 'owner'),
+(9, 'agus', '12345678', 'owner');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `bukutamu`
+-- Table structure for table `bukutamu`
 --
 
 CREATE TABLE `bukutamu` (
-  `id` int(11) NOT NULL,
+  `id` int NOT NULL,
   `nama` varchar(50) NOT NULL,
   `email` varchar(50) NOT NULL,
   `komen` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `cart`
+-- Table structure for table `cart`
 --
 
 CREATE TABLE `cart` (
-  `id_cart` int(11) NOT NULL,
+  `id_cart` int NOT NULL,
   `img_cart` varchar(50) NOT NULL,
   `nm_produk` varchar(100) NOT NULL,
-  `harga` int(50) NOT NULL,
-  `qty` int(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+  `harga` int NOT NULL,
+  `qty` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `checkout`
+-- Table structure for table `checkout`
 --
 
 CREATE TABLE `checkout` (
-  `id_checkout` int(11) NOT NULL,
+  `id_checkout` int NOT NULL,
   `no_pesanan` varchar(100) NOT NULL,
-  `tanggal_pesan` datetime NOT NULL DEFAULT current_timestamp(),
+  `tanggal_pesan` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `status` varchar(50) NOT NULL,
   `nama` varchar(50) NOT NULL,
-  `telp` int(50) NOT NULL,
+  `telp` int NOT NULL,
   `alamat` varchar(50) NOT NULL,
   `alamat_jln` varchar(50) NOT NULL,
   `alamat_blok` varchar(50) NOT NULL,
   `pengiriman` varchar(50) NOT NULL,
-  `total_bayar` int(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+  `total_bayar` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `checkout`
+-- Dumping data for table `checkout`
 --
 
 INSERT INTO `checkout` (`id_checkout`, `no_pesanan`, `tanggal_pesan`, `status`, `nama`, `telp`, `alamat`, `alamat_jln`, `alamat_blok`, `pengiriman`, `total_bayar`) VALUES
 (11, '202407172332157', '2024-07-18 06:32:16', 'Completed', 'daassadsa', 12313, 'semarang', 'czxcxz', 'zxcz', 'Kargo', 146700),
 (12, '202407172342555', '2024-07-18 06:42:55', 'Completed', 'gani maulana', 2147483647, 'kota banjar - jawa barat', 'randegan', 'rawa onom', 'Hemat', 128853),
 (13, '202407180557354', '2024-07-18 12:57:35', 'Processing', 'gani', 2147483647, 'Kota Banjar', 'randegan', 'rawa onom', 'Hemat', 128853),
-(14, '202407180613535', '2024-07-18 13:13:53', 'Completed', 'gani ', 2147483647, 'Jawa Barat', 'Banjar', 'Randegan', 'Hemat', 48951);
+(14, '202407180613535', '2024-07-18 13:13:53', 'Completed', 'gani ', 2147483647, 'Jawa Barat', 'Banjar', 'Randegan', 'Hemat', 48951),
+(15, '202412271114005', '2024-12-27 18:14:00', 'Processing', '', 0, '', '', '', 'Reguler', 48951);
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `contactus`
+-- Table structure for table `contactus`
 --
 
 CREATE TABLE `contactus` (
-  `id` int(11) NOT NULL,
-  `nama` varchar(255) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `komen` varchar(255) NOT NULL
+  `id` int NOT NULL,
+  `nama` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `komen` varchar(255) COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `contactus`
+-- Dumping data for table `contactus`
 --
 
 INSERT INTO `contactus` (`id`, `nama`, `email`, `komen`) VALUES
@@ -122,64 +124,65 @@ INSERT INTO `contactus` (`id`, `nama`, `email`, `komen`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `kategori`
+-- Table structure for table `kategori`
 --
 
 CREATE TABLE `kategori` (
-  `id_kategori` int(50) NOT NULL,
-  `nm_kategori` varchar(255) NOT NULL,
-  `img_kategori` varchar(255) NOT NULL
+  `id_kategori` int NOT NULL,
+  `nm_kategori` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `img_kategori` varchar(255) COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `kategori`
+-- Dumping data for table `kategori`
 --
 
 INSERT INTO `kategori` (`id_kategori`, `nm_kategori`, `img_kategori`) VALUES
 (1, 'Celana', 'celana-1.jpeg'),
 (2, 'Hoodie/Sweatshirt', 'hoodie-1.jpeg'),
 (3, 'Pakaian', 'pakaian-1.jpeg'),
-(6, 'Sepatuu', '1720289667_63428bd55e76d8ac9b39.png');
+(6, 'Sepatu & Sandal', 'sepatu.jpg');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `login_user`
+-- Table structure for table `login_user`
 --
 
 CREATE TABLE `login_user` (
-  `id_user` int(11) NOT NULL,
+  `id_user` int NOT NULL,
   `username` varchar(50) NOT NULL,
   `email` varchar(50) NOT NULL,
   `password` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `login_user`
+-- Dumping data for table `login_user`
 --
 
 INSERT INTO `login_user` (`id_user`, `username`, `email`, `password`) VALUES
-(3, 'gani', 'gani@gmail.com', '202cb962ac59075b964b07152d234b70');
+(3, 'gani', 'gani@gmail.com', '202cb962ac59075b964b07152d234b70'),
+(4, 'sari', 'purnamasari@gmail.com', '25d55ad283aa400af464c76d713c07ad');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `produk`
+-- Table structure for table `produk`
 --
 
 CREATE TABLE `produk` (
-  `id` int(50) NOT NULL,
-  `nm_produk` varchar(255) NOT NULL,
-  `nm_brand` varchar(255) NOT NULL,
-  `desc_produk` text NOT NULL,
-  `spesifikasi_produk` text NOT NULL,
-  `kategori` varchar(255) NOT NULL,
-  `harga` varchar(255) NOT NULL,
-  `picture` varchar(255) NOT NULL
+  `id` int NOT NULL,
+  `nm_produk` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `nm_brand` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `desc_produk` text COLLATE utf8mb4_general_ci NOT NULL,
+  `spesifikasi_produk` text COLLATE utf8mb4_general_ci NOT NULL,
+  `kategori` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `harga` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `picture` varchar(255) COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `produk`
+-- Dumping data for table `produk`
 --
 
 INSERT INTO `produk` (`id`, `nm_produk`, `nm_brand`, `desc_produk`, `spesifikasi_produk`, `kategori`, `harga`, `picture`) VALUES
@@ -194,16 +197,16 @@ INSERT INTO `produk` (`id`, `nm_produk`, `nm_brand`, `desc_produk`, `spesifikasi
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `subscribers`
+-- Table structure for table `subscribers`
 --
 
 CREATE TABLE `subscribers` (
-  `id` int(11) NOT NULL,
-  `email` varchar(255) NOT NULL
+  `id` int NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `subscribers`
+-- Dumping data for table `subscribers`
 --
 
 INSERT INTO `subscribers` (`id`, `email`) VALUES
@@ -214,111 +217,111 @@ INSERT INTO `subscribers` (`id`, `email`) VALUES
 --
 
 --
--- Indeks untuk tabel `akses_admin`
+-- Indexes for table `akses_admin`
 --
 ALTER TABLE `akses_admin`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `bukutamu`
+-- Indexes for table `bukutamu`
 --
 ALTER TABLE `bukutamu`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `cart`
+-- Indexes for table `cart`
 --
 ALTER TABLE `cart`
   ADD PRIMARY KEY (`id_cart`);
 
 --
--- Indeks untuk tabel `checkout`
+-- Indexes for table `checkout`
 --
 ALTER TABLE `checkout`
   ADD PRIMARY KEY (`id_checkout`);
 
 --
--- Indeks untuk tabel `contactus`
+-- Indexes for table `contactus`
 --
 ALTER TABLE `contactus`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `kategori`
+-- Indexes for table `kategori`
 --
 ALTER TABLE `kategori`
   ADD PRIMARY KEY (`id_kategori`);
 
 --
--- Indeks untuk tabel `login_user`
+-- Indexes for table `login_user`
 --
 ALTER TABLE `login_user`
   ADD PRIMARY KEY (`id_user`);
 
 --
--- Indeks untuk tabel `produk`
+-- Indexes for table `produk`
 --
 ALTER TABLE `produk`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `subscribers`
+-- Indexes for table `subscribers`
 --
 ALTER TABLE `subscribers`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `email` (`email`);
 
 --
--- AUTO_INCREMENT untuk tabel yang dibuang
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT untuk tabel `akses_admin`
+-- AUTO_INCREMENT for table `akses_admin`
 --
 ALTER TABLE `akses_admin`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
--- AUTO_INCREMENT untuk tabel `bukutamu`
+-- AUTO_INCREMENT for table `bukutamu`
 --
 ALTER TABLE `bukutamu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT untuk tabel `checkout`
+-- AUTO_INCREMENT for table `checkout`
 --
 ALTER TABLE `checkout`
-  MODIFY `id_checkout` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id_checkout` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
--- AUTO_INCREMENT untuk tabel `contactus`
+-- AUTO_INCREMENT for table `contactus`
 --
 ALTER TABLE `contactus`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT untuk tabel `kategori`
+-- AUTO_INCREMENT for table `kategori`
 --
 ALTER TABLE `kategori`
-  MODIFY `id_kategori` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_kategori` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT untuk tabel `login_user`
+-- AUTO_INCREMENT for table `login_user`
 --
 ALTER TABLE `login_user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_user` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT untuk tabel `produk`
+-- AUTO_INCREMENT for table `produk`
 --
 ALTER TABLE `produk`
-  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
--- AUTO_INCREMENT untuk tabel `subscribers`
+-- AUTO_INCREMENT for table `subscribers`
 --
 ALTER TABLE `subscribers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
